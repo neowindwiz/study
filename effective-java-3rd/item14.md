@@ -46,6 +46,36 @@ public interface Comparable<T> {
 * Arrays와 Collections같은 utility class
 * 탐색과 정렬 알고리즘을 포함하는 class
 
+
+### equals 와 compareTo
+hashSet은 equals로 비교, treeSet은 compareTo
+```java
+//hashSet
+  Set<BigDecimal> hashSet = new HashSet<>();
+
+  hashSet.add(new BigDecimal("1.0"));
+  hashSet.add(new BigDecimal("1.00"));
+  System.out.println(hashSet.size());  //2
+
+
+  //treeSet
+  Set<BigDecimal> treeSet = new TreeSet<>();
+
+  treeSet.add(new BigDecimal("1.0"));
+  treeSet.add(new BigDecimal("1.00"));
+  System.out.println(treeSet.size());  //1
+```
+```java
+System.out.println(new BigDecimal("1.0").compareTo(new BigDecimal("1.00")));
+//0
+
+System.out.println(new BigDecimal("1.0").equals(new BigDecimal("1.00")));
+//false
+
+System.out.println(new Double(1.0).equals(1.00));
+//true
+```
+
 ```java
 // Single-field Compareable with object reference field
 public final class CaseInsensitiveString implements Comparable<CaseInsensitiveString> {
