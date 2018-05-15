@@ -40,6 +40,11 @@ public interface Comparable<T> {
 
 * (x.compareTo(y) == 0) == (x.equals(y))
 
+### Hashcode로 비교할 수 없을때
+크거나 작고 같은 지를 비교하기 위해서는 compareTo를 사용
+* TreeSet이나 TreeMap 같은 sorted collection
+* Arrays와 Collections같은 utility class
+* 탐색과 정렬 알고리즘을 포함하는 class
 
 ```java
 // Single-field Compareable with object reference field
@@ -66,7 +71,7 @@ public int compareTo(PhoneNumber pn) {
 }
 ```
 
-### 성능 향상을 위해 정
+### 성능 향상을 위해
 ```java
 // Comparable with comparator construction methos
 private static final Comparator<PhoneNumber> COMPARATOR = 
@@ -79,6 +84,9 @@ public int compareTo(PhoneNumber pn) {
 }
 ```
 
+### 사용하지 말자 (integer overflow)
+* Integer.MAX_VALUE를 넘어버리면 음수가 된다.
+* 에러는 발생하지 않음...
 ```java
 // BROKEN difference-based comparator - violates transitivilty!
 static Comparator<Object> hasCodeOrder = new Comparator<>() {
@@ -88,6 +96,7 @@ static Comparator<Object> hasCodeOrder = new Comparator<>() {
 };
 ```
 
+### 사용하자 (static compare method)
 ```java
 // Comparator based on static compare method
 static Comparator<Object> hashCodeOrder = new Comparator<>() {
@@ -97,6 +106,7 @@ static Comparator<Object> hashCodeOrder = new Comparator<>() {
 };
 ```
 
+### 사용하자 (construction method)
 ```java
 // Comparator based on Comparator construction method
 static Comparator<Object> hashCodeOrder = 
