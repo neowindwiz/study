@@ -1,7 +1,7 @@
 # Item 31: Use bounded wildcards to increase API flexibility
 
 ## `List<String>`은 `List<Object>`의 하위 타입이 아니다.
-* Item 28에 언급했듯이, 매개 변수화된 타입은 불변이다.
+* 매개 변수화된 타입은 불변이다. (Item 28)
 * Type1과 Type2은 `List<Type1>`의 하위 타입도 아니고, `List<Type2>`의 슈퍼 타입도 아니다.
 * `List<Object>`에 어떤 객체도 넣을 수 있지만, `List<String>`에는 String만 넣을 수 있다.
 * `List<String>`은 `List<Object>`가 할 수 있는 모듯 것을 할수 없기 때문에, 하위 타입이 아니다. (by the Liskov substitution principal, Item 10)
@@ -83,6 +83,7 @@ public void popAll(Collection<? super E> dst) {
 ### 여기 까지의 교훈
 * 유연성을 최대화하려면, 객체 생산자(producer)나 소비자(consumer) 구실을 하는 메서드 인자의 자료형은 와일드카드 자료형으로 하라는 것이다.
 * 어떤 와일드카드를 쓸지 암기하기 어렵다면, PECS (Produce - Extends, Consumer - Super) 약어를 활용하자.
+* Naftalin과 Wadler는 그것을 Get and Put Principle이라고 부른다.
 
 ### 이 니모닉을 염두에 두고 이 장의 이전 항목에서 제시한 몇 가지 방법과 생성자 선언을 살펴보자. 항목 28의 선택자 생성자는 다음과 같은 선언을합니다.
 
